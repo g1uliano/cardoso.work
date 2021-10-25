@@ -29,7 +29,7 @@ body {
 .container {
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 50vh;
 
   perspective: 100vw;
   perspective-origin: center;
@@ -127,5 +127,62 @@ body {
   font-size: 12px;
   letter-spacing: 3px;
 }
+.main {
+  border-radius: 10px;
+  background: #0000005f;
+  padding: 20px; 
+  margin: auto;
+  width: 80%;
+  padding: 10px;
+}
+.h2, h2 {
+  font-size: calc(1.325rem + .9vw);
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+p {
+  line-height: 1.5;
+  display: block;
+}
 
+a:link {
+  color: #b4c8e7;
+  text-decoration: underline;
+}
 
+/* visited link */
+a:visited {
+  color: #b4c8e7;
+  text-decoration: underline;
+}
+
+/* mouse over link */
+a:hover {
+  color: #92b7ee;
+  text-decoration: underline;
+}
+
+/* selected link */
+a:active {
+  color: #b4c8e7;
+  text-decoration: underline;
+
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+.inside {
+  color:#eaeaea;
+  text-shadow: 1px 1px 2px black;
+}
+
+.recuo {
+  margin-left: 2em; 
+  text-indent: 0em
+}
