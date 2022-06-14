@@ -154,25 +154,25 @@ p {
 }
 
 a:link {
-  color: #b4c8e7;
+  color: #0f0f0f;
   text-decoration: underline;
 }
 
 /* visited link */
 a:visited {
-  color: #b4c8e7;
+  color: #0f0f0f;
   text-decoration: underline;
 }
 
 /* mouse over link */
 a:hover {
-  color: #92b7ee;
+  color: rgb(16, 17, 17);
   text-decoration: underline;
 }
 
 /* selected link */
 a:active {
-  color: #b4c8e7;
+  color: #161718;
   text-decoration: underline;
 
 }
