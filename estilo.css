@@ -191,6 +191,9 @@ a:active {
   text-indent: 0em
 }
 
+.about {
+  text-align: center;
+}
 .cv {
   text-align: center;
 }
