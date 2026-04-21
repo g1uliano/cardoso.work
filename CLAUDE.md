@@ -86,3 +86,11 @@ O carrossel principal substitui o mockup CSS original e apresenta:
 - Imagens pré-carregadas com `<link rel="preload">`
 - Transições otimizadas para GPU
 - Código JavaScript minificado na produção
+
+## Deploy e Publicação
+
+- **URL de Produção**: https://cardoso.work
+- **Plataforma**: Cloudflare Pages
+- **Build Version**: v3
+- **Deploy Automático**: Cada push para o repositório é automaticamente publicado
+- **Domínio**: Configurado para usar o domínio personalizado cardoso.work
