@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Loading Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-image {
+            max-width: 300px;
+            height: auto;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+        }
+        .status {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Carousel Images Loading Test</h1>
+    <p>Testing if carousel images load correctly:</p>
+
+    <div id="test-results"></div>
+
+    <div class="images">
+        <h2>Direct Image Tags:</h2>
+        <img src="images/f1.png" alt="F1" class="test-image" onload="reportSuccess('f1')" onerror="reportError('f1')">
+        <img src="images/f2.png" alt="F2" class="test-image" onload="reportSuccess('f2')" onerror="reportError('f2')">
+        <img src="images/f3.png" alt="F3" class="test-image" onload="reportSuccess('f3')" onerror="reportError('f3')">
+        <img src="images/f4.png" alt="F4" class="test-image" onload="reportSuccess('f4')" onerror="reportError('f4')">
+        <img src="images/f5.png" alt="F5" class="test-image" onload="reportSuccess('f5')" onerror="reportError('f5')">
+    </div>
+
+    <script>
+        const results = {};
+        const resultsDiv = document.getElementById('test-results');
+
+        function reportSuccess(imageId) {
+            results[imageId] = 'success';
+            updateResults();
+        }
+
+        function reportError(imageId) {
+            results[imageId] = 'error';
+            updateResults();
+        }
+
+        function updateResults() {
+            resultsDiv.innerHTML = Object.entries(results)
+                .map(([id, status]) => {
+                    const className = status === 'success' ? 'status' : 'error';
+                    return `<p class="${className}">Image ${id}: ${status}</p>`;
+                })
+                .join('');
+        }
+
+        // Additional test: load images via JavaScript
+        setTimeout(() => {
+            console.log('Testing programmatic image loading...');
+
+            ['f1', 'f2', 'f3', 'f4', 'f5'].forEach(id => {
+                const img = new Image();
+                img.onload = () => console.log(`JS: ${id} loaded successfully`);
+                img.onerror = () => console.log(`JS: ${id} failed to load`);
+                img.src = `images/${id}.png`;
+            });
+        }, 1000);
+    </script>
+</body>
+</html>
