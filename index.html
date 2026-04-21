@@ -1315,6 +1315,81 @@
 </footer>
 
 <script>
+// Carousel functionality
+class ImageCarousel {
+  constructor(container) {
+    this.container = container;
+    this.images = container.querySelectorAll('.carousel-image');
+    this.dots = container.querySelectorAll('.dot');
+    this.currentSlide = 0;
+    this.autoPlayTimer = null;
+    this.isPlaying = true;
+
+    this.init();
+  }
+
+  init() {
+    // Add event listeners for dots
+    this.dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => this.goToSlide(index));
+    });
+
+    // Add hover pause functionality
+    this.container.addEventListener('mouseenter', () => this.pauseAutoPlay());
+    this.container.addEventListener('mouseleave', () => this.resumeAutoPlay());
+
+    // Start auto-play
+    this.startAutoPlay();
+  }
+
+  goToSlide(slideIndex) {
+    // Remove active class from current slide and dot
+    this.images[this.currentSlide].classList.remove('active');
+    this.dots[this.currentSlide].classList.remove('active');
+
+    // Update current slide index
+    this.currentSlide = slideIndex;
+
+    // Add active class to new slide and dot
+    this.images[this.currentSlide].classList.add('active');
+    this.dots[this.currentSlide].classList.add('active');
+  }
+
+  nextSlide() {
+    const nextIndex = (this.currentSlide + 1) % this.images.length;
+    this.goToSlide(nextIndex);
+  }
+
+  startAutoPlay() {
+    if (this.isPlaying) {
+      this.autoPlayTimer = setInterval(() => {
+        this.nextSlide();
+      }, 4000);
+    }
+  }
+
+  pauseAutoPlay() {
+    if (this.autoPlayTimer) {
+      clearInterval(this.autoPlayTimer);
+      this.autoPlayTimer = null;
+    }
+  }
+
+  resumeAutoPlay() {
+    if (this.isPlaying && !this.autoPlayTimer) {
+      this.startAutoPlay();
+    }
+  }
+}
+
+// Initialize carousel when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  const carouselContainer = document.querySelector('.carousel-container');
+  if (carouselContainer) {
+    new ImageCarousel(carouselContainer);
+  }
+});
+
   const root = document.documentElement;
   const btn = document.getElementById('themeToggle');
   const icon = document.getElementById('themeIcon');
