@@ -7,6 +7,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Preload carousel images for better performance -->
+<link rel="preload" as="image" href="images/f1.png">
+<link rel="preload" as="image" href="images/f2.png">
+<link rel="preload" as="image" href="images/f3.png">
+<link rel="preload" as="image" href="images/f4.png">
+<link rel="preload" as="image" href="images/f5.png">
 <style>
   /* ========== THEMES ========== */
   :root[data-theme="dark"] {
@@ -540,261 +547,55 @@
     grid-template-columns: 1fr 1.1fr;
     gap: 4rem;
     align-items: center;
+    min-height: 500px;
   }
 
   .project-visual {
     display: flex;
     justify-content: center;
     position: relative;
+    height: 400px;
+    align-items: center;
   }
 
   /* ========== CAROUSEL ========== */
   .carousel-container {
     position: relative;
-    max-width: 300px;
+    width: 300px !important;
+    height: 400px !important;
     transform: rotate(-3deg);
     border-radius: 24px;
     box-shadow: 0 35px 80px rgba(0,0,0,0.45);
     overflow: hidden;
     background: #f5f5f5;
     border: 1px solid #ddd;
+    display: block !important;
   }
 
   .carousel-images {
     position: relative;
-    width: 100%;
-    height: 400px;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    overflow: hidden;
   }
 
-  .carousel-slide {
+  /* Carousel image styling */
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
   }
 
-  .carousel-slide.active {
+  .carousel-image.active {
     opacity: 1;
-  }
-
-  /* Mockups CSS das telas do Reforma Simples */
-  .rs-mockup {
-    width: 100%;
-    height: 100%;
-    background: #f5f5f5;
-    position: relative;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    overflow: hidden;
-    font-size: 12px;
-  }
-
-  .rs-header {
-    background: #4CAF50;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
-    color: white;
-  }
-
-  .rs-back-btn {
-    width: 20px;
-    height: 20px;
-    margin-right: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-  }
-
-  .rs-title {
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  .rs-content {
-    background: white;
-    padding: 16px;
-    height: calc(100% - 50px);
-    overflow-y: auto;
-  }
-
-  /* Tela 1 - Principal */
-  .rs-main {
-    text-align: center;
-  }
-
-  .rs-main .rs-logo {
-    width: 80px;
-    height: 80px;
-    background: #4CAF50;
-    border-radius: 16px;
-    margin: 30px auto 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-  .rs-main .rs-subtitle {
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 30px;
-    line-height: 1.4;
-  }
-
-  .rs-button {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 500;
-    margin: 6px;
-    min-width: 160px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* Tela 2 - Lista de Materiais */
-  .rs-list-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-  }
-
-  .rs-icon {
-    width: 32px;
-    height: 32px;
-    background: #4CAF50;
-    border-radius: 6px;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 10px;
-  }
-
-  .rs-item-text {
-    flex: 1;
-    font-size: 11px;
-    color: #333;
-  }
-
-  /* Tela 3 - Calculadora */
-  .rs-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    padding: 16px;
-  }
-
-  .rs-card {
-    background: white;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
-
-  .rs-card-icon {
-    width: 40px;
-    height: 40px;
-    margin: 0 auto 10px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 16px;
-  }
-
-  .rs-card-icon.blue { background: #2196F3; }
-  .rs-card-icon.orange { background: #FF9800; }
-  .rs-card-icon.green { background: #4CAF50; }
-
-  .rs-card-title {
-    font-size: 11px;
-    color: #333;
-    font-weight: 500;
-  }
-
-  /* Tela 4 - Resultados */
-  .rs-result-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-  }
-
-  .rs-result-left {
-    display: flex;
-    align-items: center;
-  }
-
-  .rs-result-quantity {
-    font-weight: bold;
-    color: #4CAF50;
-    font-size: 11px;
-  }
-
-  .rs-finish-btn {
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
-    right: 16px;
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 500;
-  }
-
-  /* Tela 5 - Configurações */
-  .rs-settings-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-  }
-
-  .rs-settings-left {
-    display: flex;
-    align-items: center;
-  }
-
-  .rs-arrow {
-    width: 16px;
-    height: 16px;
-    color: #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .rs-footer {
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
-    right: 16px;
-    text-align: center;
-    font-size: 10px;
-    color: #999;
   }
 
   .carousel-dots {
@@ -1373,164 +1174,19 @@
         <div class="carousel-container">
           <div class="carousel-images">
             <!-- f1.png - Tela Principal -->
-            <div class="carousel-slide active">
-              <div class="rs-mockup rs-main">
-                <div class="rs-header">
-                  <div class="rs-title">Reforma Simples</div>
-                </div>
-                <div class="rs-content">
-                  <div class="rs-logo">RS</div>
-                  <div class="rs-subtitle">Calculadora de Materiais<br>para Reforma</div>
-                  <button class="rs-button">Calcular Materiais</button>
-                  <button class="rs-button">Histórico</button>
-                  <button class="rs-button">Configurações</button>
-                </div>
-              </div>
-            </div>
+            <img src="images/f1.png" alt="Reforma Simples - Tela Principal com logo e botões de navegação" class="carousel-image active">
 
             <!-- f2.png - Lista de Materiais -->
-            <div class="carousel-slide">
-              <div class="rs-mockup">
-                <div class="rs-header">
-                  <div class="rs-back-btn">←</div>
-                  <div class="rs-title">Lista de Materiais</div>
-                </div>
-                <div class="rs-content">
-                  <div class="rs-list-item">
-                    <div class="rs-icon">T</div>
-                    <div class="rs-item-text">Tinta Acrílica Branca</div>
-                  </div>
-                  <div class="rs-list-item">
-                    <div class="rs-icon">R</div>
-                    <div class="rs-item-text">Rolo de Pintura</div>
-                  </div>
-                  <div class="rs-list-item">
-                    <div class="rs-icon">L</div>
-                    <div class="rs-item-text">Lixa d'Água</div>
-                  </div>
-                  <div class="rs-list-item">
-                    <div class="rs-icon">M</div>
-                    <div class="rs-item-text">Massa Corrida</div>
-                  </div>
-                  <div class="rs-list-item">
-                    <div class="rs-icon">P</div>
-                    <div class="rs-item-text">Pincel</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <img src="images/f2.png" alt="Reforma Simples - Lista de Materiais de construção" class="carousel-image">
 
             <!-- f3.png - Calculadora -->
-            <div class="carousel-slide">
-              <div class="rs-mockup">
-                <div class="rs-header">
-                  <div class="rs-back-btn">←</div>
-                  <div class="rs-title">Calculadora de Materiais</div>
-                </div>
-                <div class="rs-content" style="padding: 0;">
-                  <div class="rs-grid">
-                    <div class="rs-card">
-                      <div class="rs-card-icon blue">T</div>
-                      <div class="rs-card-title">Tintas</div>
-                    </div>
-                    <div class="rs-card">
-                      <div class="rs-card-icon orange">P</div>
-                      <div class="rs-card-title">Pisos</div>
-                    </div>
-                    <div class="rs-card">
-                      <div class="rs-card-icon green">E</div>
-                      <div class="rs-card-title">Elétrica</div>
-                    </div>
-                    <div class="rs-card">
-                      <div class="rs-card-icon blue">H</div>
-                      <div class="rs-card-title">Hidráulica</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <img src="images/f3.png" alt="Reforma Simples - Calculadora de Materiais com categorias" class="carousel-image">
 
             <!-- f4.png - Resultados -->
-            <div class="carousel-slide">
-              <div class="rs-mockup">
-                <div class="rs-header">
-                  <div class="rs-back-btn">←</div>
-                  <div class="rs-title">Resultado do Cálculo</div>
-                </div>
-                <div class="rs-content">
-                  <div class="rs-result-item">
-                    <div class="rs-result-left">
-                      <div class="rs-icon">T</div>
-                      <div class="rs-item-text">Tinta Branca</div>
-                    </div>
-                    <div class="rs-result-quantity">3 latas</div>
-                  </div>
-                  <div class="rs-result-item">
-                    <div class="rs-result-left">
-                      <div class="rs-icon">R</div>
-                      <div class="rs-item-text">Rolo de Pintura</div>
-                    </div>
-                    <div class="rs-result-quantity">2 unid</div>
-                  </div>
-                  <div class="rs-result-item">
-                    <div class="rs-result-left">
-                      <div class="rs-icon">L</div>
-                      <div class="rs-item-text">Lixa</div>
-                    </div>
-                    <div class="rs-result-quantity">4 folhas</div>
-                  </div>
-                  <div class="rs-result-item">
-                    <div class="rs-result-left">
-                      <div class="rs-icon">M</div>
-                      <div class="rs-item-text">Massa Corrida</div>
-                    </div>
-                    <div class="rs-result-quantity">1 balde</div>
-                  </div>
-                  <button class="rs-finish-btn">Finalizar</button>
-                </div>
-              </div>
-            </div>
+            <img src="images/f4.png" alt="Reforma Simples - Resultado do Cálculo com quantidades" class="carousel-image">
 
             <!-- f5.png - Configurações -->
-            <div class="carousel-slide">
-              <div class="rs-mockup">
-                <div class="rs-header">
-                  <div class="rs-back-btn">←</div>
-                  <div class="rs-title">Configurações</div>
-                </div>
-                <div class="rs-content">
-                  <div class="rs-settings-item">
-                    <div class="rs-settings-left">
-                      <div class="rs-icon">i</div>
-                      <div class="rs-item-text">Sobre o App</div>
-                    </div>
-                    <div class="rs-arrow">→</div>
-                  </div>
-                  <div class="rs-settings-item">
-                    <div class="rs-settings-left">
-                      <div class="rs-icon">?</div>
-                      <div class="rs-item-text">Ajuda</div>
-                    </div>
-                    <div class="rs-arrow">→</div>
-                  </div>
-                  <div class="rs-settings-item">
-                    <div class="rs-settings-left">
-                      <div class="rs-icon">*</div>
-                      <div class="rs-item-text">Avaliar App</div>
-                    </div>
-                    <div class="rs-arrow">→</div>
-                  </div>
-                  <div class="rs-settings-item">
-                    <div class="rs-settings-left">
-                      <div class="rs-icon">↗</div>
-                      <div class="rs-item-text">Compartilhar</div>
-                    </div>
-                    <div class="rs-arrow">→</div>
-                  </div>
-                  <div class="rs-footer">Versão 1.2.3</div>
-                </div>
-              </div>
-            </div>
+            <img src="images/f5.png" alt="Reforma Simples - Tela de Configurações do aplicativo" class="carousel-image">
           </div>
           <div class="carousel-dots">
             <button class="dot active" data-slide="0" aria-label="Ver primeira tela"></button>
@@ -1540,7 +1196,7 @@
             <button class="dot" data-slide="4" aria-label="Ver quinta tela"></button>
           </div>
         </div>
-        <div class="device-caption">mockups do app Reforma Simples</div>
+        <div class="device-caption">screenshots do app Reforma Simples</div>
       </div>
 
       <div class="project-info">
@@ -1703,7 +1359,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  const slides = carouselContainer.querySelectorAll('.carousel-slide');
+  const slides = carouselContainer.querySelectorAll('.carousel-image');
   const dots = carouselContainer.querySelectorAll('.dot');
 
   console.log('Found', slides.length, 'slides and', dots.length, 'dots');
