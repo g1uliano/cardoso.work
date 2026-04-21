@@ -548,331 +548,6 @@
     position: relative;
   }
 
-  /* ------ DEVICE MOCKUP (uses real Reforma Simples UI style) ------ */
-  .device {
-    width: 300px;
-    aspect-ratio: 9/19.5;
-    background: #0a0a0a;
-    border-radius: 40px;
-    padding: 10px;
-    position: relative;
-    box-shadow:
-      0 35px 80px rgba(0,0,0,0.45),
-      0 0 0 2px #2a2a2a,
-      inset 0 0 0 2px #1a1a1a;
-    transform: rotate(-3deg);
-    transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
-  }
-
-  .device:hover { transform: rotate(0) scale(1.03); }
-
-  .device-notch {
-    position: absolute;
-    top: 14px; left: 50%;
-    transform: translateX(-50%);
-    width: 95px; height: 26px;
-    background: #000;
-    border-radius: 0 0 16px 16px;
-    z-index: 5;
-  }
-
-  .device-screen {
-    background: var(--rs-bg);
-    height: 100%;
-    border-radius: 30px;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* -- App top bar -- */
-  .rs-statusbar {
-    height: 32px;
-    background: var(--rs-primary);
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 10px;
-    flex-shrink: 0;
-  }
-
-  .rs-signal {
-    display: inline-flex;
-    gap: 3px;
-    align-items: center;
-  }
-
-  .rs-signal span {
-    width: 3px;
-    background: #fff;
-    border-radius: 1px;
-  }
-  .rs-signal span:nth-child(1) { height: 4px; }
-  .rs-signal span:nth-child(2) { height: 6px; }
-  .rs-signal span:nth-child(3) { height: 8px; }
-  .rs-signal span:nth-child(4) { height: 10px; opacity: 0.5; }
-
-  .rs-header {
-    background: var(--rs-primary);
-    padding: 0.5rem 1rem 1rem;
-    color: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    flex-shrink: 0;
-  }
-
-  .rs-header-top {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .rs-hamburger {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .rs-hamburger span {
-    width: 16px; height: 2px;
-    background: #fff;
-    border-radius: 1px;
-  }
-
-  .rs-app-title {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-  }
-
-  .rs-subtitle {
-    font-size: 9.5px;
-    opacity: 0.9;
-    font-weight: 400;
-  }
-
-  .rs-search {
-    background: rgba(255,255,255,0.95);
-    border-radius: 4px;
-    padding: 0.45rem 0.6rem;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--rs-dim);
-    font-size: 10px;
-  }
-
-  .rs-search-icon {
-    width: 11px; height: 11px;
-    border: 1.5px solid var(--rs-dim);
-    border-radius: 50%;
-    position: relative;
-    flex-shrink: 0;
-  }
-
-  .rs-search-icon::after {
-    content: '';
-    position: absolute;
-    bottom: -3px; right: -3px;
-    width: 5px; height: 1.5px;
-    background: var(--rs-dim);
-    transform: rotate(45deg);
-    border-radius: 1px;
-  }
-
-  /* -- Services list -- */
-  .rs-body {
-    flex: 1;
-    padding: 0.8rem;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .rs-section-hdr {
-    font-family: 'Inter', sans-serif;
-    font-size: 9px;
-    font-weight: 700;
-    color: var(--rs-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    padding: 0.25rem 0.2rem;
-  }
-
-  .rs-item {
-    background: var(--rs-card);
-    border-radius: 6px;
-    padding: 0.6rem 0.7rem;
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  }
-
-  .rs-item-icon {
-    width: 30px; height: 30px;
-    border-radius: 6px;
-    background: #fff4e0;
-    border: 1px solid #f2d9a8;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--rs-primary-d);
-    font-weight: 700;
-    font-size: 11px;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .rs-item-text {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .rs-item-name {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--rs-ink);
-    line-height: 1.2;
-  }
-
-  .rs-item-meta {
-    font-size: 9px;
-    color: var(--rs-dim);
-    margin-top: 1px;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .rs-item-val {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--rs-ink);
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  .rs-item-val .c {
-    display: block;
-    font-size: 8.5px;
-    color: var(--rs-dim);
-    font-weight: 500;
-    margin-top: 1px;
-  }
-
-  /* -- Bottom total bar -- */
-  .rs-total {
-    background: var(--rs-ink);
-    color: #fff;
-    padding: 0.75rem 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0;
-    margin-top: auto;
-  }
-
-  .rs-total-l {
-    font-family: 'Inter', sans-serif;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    opacity: 0.75;
-  }
-
-  .rs-total-l strong {
-    display: block;
-    font-size: 11px;
-    letter-spacing: 0.02em;
-    opacity: 1;
-    margin-top: 1px;
-  }
-
-  .rs-total-v {
-    font-family: 'Inter', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--rs-primary);
-  }
-
-  /* Bottom tab bar */
-  .rs-tabs {
-    background: #fff;
-    border-top: 1px solid var(--rs-divider);
-    display: flex;
-    justify-content: space-around;
-    padding: 0.5rem 0 0.7rem;
-    flex-shrink: 0;
-  }
-
-  .rs-tab {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    font-size: 8.5px;
-    color: var(--rs-dim);
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-  }
-
-  .rs-tab.active { color: var(--rs-primary-d); }
-
-  .rs-tab-icon {
-    width: 14px; height: 14px;
-    border: 1.5px solid currentColor;
-    border-radius: 3px;
-  }
-  .rs-tab.active .rs-tab-icon {
-    background: var(--rs-primary);
-    border-color: var(--rs-primary);
-  }
-  .rs-tab-icon.plus {
-    border-radius: 50%;
-    position: relative;
-  }
-  .rs-tab-icon.plus::after {
-    content: '+';
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: currentColor;
-    font-size: 13px;
-    line-height: 1;
-  }
-  .rs-tab.active .rs-tab-icon.plus::after { color: #fff; }
-  .rs-tab-icon.list {
-    border-radius: 2px;
-  }
-
-  /* Label "screenshot do app" */
-  .device-caption {
-    position: absolute;
-    bottom: -2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--text-mute);
-    white-space: nowrap;
-  }
-
-  .device-caption::before {
-    content: '↑ ';
-    color: var(--accent);
-  }
-
   /* ========== CAROUSEL ========== */
   .carousel-container {
     position: relative;
@@ -962,6 +637,21 @@
       width: 6px;
       height: 6px;
     }
+  }
+
+  /* Caption for the carousel */
+  .device-caption {
+    text-align: center;
+    margin-top: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-mute);
+    white-space: nowrap;
+  }
+
+  .device-caption::before {
+    content: '↑ ';
+    color: var(--accent);
   }
 
   /* ------ Project copy ------ */
@@ -1266,8 +956,6 @@
 
     .stat-row { gap: 1.5rem; }
     .hero-meta { gap: 1rem 1.5rem; }
-
-    .device { width: 250px; }
   }
 </style>
 </head>
@@ -1459,128 +1147,23 @@
         ============================================================
       -->
       <div class="project-visual reveal d1">
-        <div class="device">
-          <div class="device-notch"></div>
-          <div class="device-screen">
-
-            <!-- Status bar -->
-            <div class="rs-statusbar">
-              <span>9:41</span>
-              <span class="rs-signal">
-                <span></span><span></span><span></span><span></span>
-              </span>
-            </div>
-
-            <!-- App header with hamburger + title + search -->
-            <div class="rs-header">
-              <div class="rs-header-top">
-                <div class="rs-hamburger">
-                  <span></span><span></span><span></span>
-                </div>
-                <div>
-                  <div class="rs-app-title">Reforma Simples</div>
-                  <div class="rs-subtitle">SINAPI · AC · abr/2026</div>
-                </div>
-              </div>
-              <div class="rs-search">
-                <div class="rs-search-icon"></div>
-                <span>Buscar serviço...</span>
-              </div>
-            </div>
-
-            <!-- Services list -->
-            <div class="rs-body">
-              <div class="rs-section-hdr">Serviços adicionados</div>
-
-              <div class="rs-item">
-                <div class="rs-item-icon">AL</div>
-                <div class="rs-item-text">
-                  <div class="rs-item-name">Alvenaria</div>
-                  <div class="rs-item-meta">12,5 m² · tijolo 6 furos</div>
-                </div>
-                <div class="rs-item-val">
-                  R$ 1.240
-                  <span class="c">6 itens</span>
-                </div>
-              </div>
-
-              <div class="rs-item">
-                <div class="rs-item-icon">CT</div>
-                <div class="rs-item-text">
-                  <div class="rs-item-name">Contrapiso</div>
-                  <div class="rs-item-meta">8,0 m² · traço 1:4</div>
-                </div>
-                <div class="rs-item-val">
-                  R$ 620
-                  <span class="c">4 itens</span>
-                </div>
-              </div>
-
-              <div class="rs-item">
-                <div class="rs-item-icon">PT</div>
-                <div class="rs-item-text">
-                  <div class="rs-item-name">Pintura</div>
-                  <div class="rs-item-meta">24 m² · acrílica 2 demãos</div>
-                </div>
-                <div class="rs-item-val">
-                  R$ 480
-                  <span class="c">3 itens</span>
-                </div>
-              </div>
-
-              <div class="rs-item">
-                <div class="rs-item-icon">RV</div>
-                <div class="rs-item-text">
-                  <div class="rs-item-name">Revestimento</div>
-                  <div class="rs-item-meta">10 m² · cerâmico</div>
-                </div>
-                <div class="rs-item-val">
-                  R$ 890
-                  <span class="c">5 itens</span>
-                </div>
-              </div>
-
-              <div class="rs-item">
-                <div class="rs-item-icon">EL</div>
-                <div class="rs-item-text">
-                  <div class="rs-item-name">Elétrica</div>
-                  <div class="rs-item-meta">ponto novo · 220v</div>
-                </div>
-                <div class="rs-item-val">
-                  R$ 1.050
-                  <span class="c">8 itens</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Total bar -->
-            <div class="rs-total">
-              <div class="rs-total-l">
-                Total da obra
-                <strong>5 serviços</strong>
-              </div>
-              <div class="rs-total-v">R$ 4.280</div>
-            </div>
-
-            <!-- Bottom tabs -->
-            <div class="rs-tabs">
-              <div class="rs-tab active">
-                <div class="rs-tab-icon list"></div>
-                <span>Obra</span>
-              </div>
-              <div class="rs-tab">
-                <div class="rs-tab-icon plus"></div>
-                <span>Serviço</span>
-              </div>
-              <div class="rs-tab">
-                <div class="rs-tab-icon"></div>
-                <span>Relatório</span>
-              </div>
-            </div>
-
+        <div class="carousel-container">
+          <div class="carousel-images">
+            <img src="f1.png" alt="Reforma Simples - Tela Principal" class="carousel-image active">
+            <img src="f2.png" alt="Reforma Simples - Lista de Materiais" class="carousel-image">
+            <img src="f3.png" alt="Reforma Simples - Calculadora" class="carousel-image">
+            <img src="f4.png" alt="Reforma Simples - Resultados" class="carousel-image">
+            <img src="f5.png" alt="Reforma Simples - Configurações" class="carousel-image">
+          </div>
+          <div class="carousel-dots">
+            <button class="dot active" data-slide="0" aria-label="Ver primeira tela"></button>
+            <button class="dot" data-slide="1" aria-label="Ver segunda tela"></button>
+            <button class="dot" data-slide="2" aria-label="Ver terceira tela"></button>
+            <button class="dot" data-slide="3" aria-label="Ver quarta tela"></button>
+            <button class="dot" data-slide="4" aria-label="Ver quinta tela"></button>
           </div>
         </div>
-        <div class="device-caption">tela do app Reforma Simples</div>
+        <div class="device-caption">imagens do app Reforma Simples</div>
       </div>
 
       <div class="project-info">
