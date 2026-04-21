@@ -873,6 +873,97 @@
     color: var(--accent);
   }
 
+  /* ========== CAROUSEL ========== */
+  .carousel-container {
+    position: relative;
+    max-width: 300px;
+    transform: rotate(-3deg);
+    border-radius: 24px;
+    box-shadow: 0 35px 80px rgba(0,0,0,0.45);
+    overflow: hidden;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+  }
+
+  .carousel-images {
+    position: relative;
+    width: 100%;
+    height: 400px;
+  }
+
+  .carousel-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .carousel-image.active {
+    opacity: 1;
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: linear-gradient(to top, var(--bg-soft), transparent);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: var(--text-mute);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .dot:hover {
+    background: var(--accent);
+    transform: scale(1.2);
+  }
+
+  .dot.active {
+    background: var(--accent);
+  }
+
+  /* Responsive carousel */
+  @media (max-width: 768px) {
+    .carousel-container {
+      max-width: 250px;
+    }
+
+    .carousel-images {
+      height: 350px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carousel-container {
+      max-width: 200px;
+    }
+
+    .carousel-images {
+      height: 280px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+    }
+  }
+
   /* ------ Project copy ------ */
   .project-tag {
     font-family: 'JetBrains Mono', monospace;
