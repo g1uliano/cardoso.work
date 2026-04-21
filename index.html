@@ -17,13 +17,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Preload carousel images for better performance -->
-<link rel="preload" as="image" href="images/f1.png">
-<link rel="preload" as="image" href="images/f2.png">
-<link rel="preload" as="image" href="images/f3.png">
-<link rel="preload" as="image" href="images/f4.png">
-<link rel="preload" as="image" href="images/f5.png">
 <style>
   /* ========== THEMES ========== */
   :root[data-theme="dark"] {
@@ -54,15 +47,16 @@
     --accent-3:  #0969da;
   }
 
-  /* Brand colors for Reforma Simples screen — these stay fixed regardless of site theme */
+  /* Reforma Simples brand colors — fixed (real app palette: deep navy + white) */
   :root {
-    --rs-primary:   #f4a42a;  /* laranja/âmbar típico de marcas de construção */
-    --rs-primary-d: #d68a18;
-    --rs-bg:        #f7f7f5;
-    --rs-card:      #ffffff;
-    --rs-ink:       #1f1f1f;
+    --rs-navy:      #0e2b6e;
+    --rs-navy-soft: #1f3a85;
+    --rs-blue:      #1565d8;
+    --rs-bg:        #ffffff;
+    --rs-soft:      #eef0f4;
+    --rs-ink:       #1c1c1c;
     --rs-dim:       #6b6b6b;
-    --rs-divider:   #ececec;
+    --rs-divider:   #d8d8d8;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -563,114 +557,302 @@
     display: flex;
     justify-content: center;
     position: relative;
-    height: 580px;
+  }
+
+  /* ============================================================
+     DEVICE MOCKUP — fiel ao app real Reforma Simples
+     Tela mostrada: "Selecione um tipo de serviço"
+     Para trocar pelo screenshot real:
+     1. Substitua o bloco <div class="device">...</div>
+        por <img src="caminho.png" alt="Tela do Reforma Simples"
+             class="device-img">
+     ============================================================ */
+  .device {
+    width: 300px;
+    aspect-ratio: 9/19.5;
+    background: #0a0a0a;
+    border-radius: 40px;
+    padding: 10px;
+    position: relative;
+    box-shadow:
+      0 35px 80px rgba(0,0,0,0.45),
+      0 0 0 2px #2a2a2a,
+      inset 0 0 0 2px #1a1a1a;
+    transform: rotate(-3deg);
+    transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+    flex-shrink: 0;
+  }
+
+  .device:hover { transform: rotate(0) scale(1.03); }
+
+  .device-notch {
+    position: absolute;
+    top: 14px; left: 50%;
+    transform: translateX(-50%);
+    width: 95px; height: 26px;
+    background: #000;
+    border-radius: 0 0 16px 16px;
+    z-index: 5;
+  }
+
+  .device-screen {
+    background: var(--rs-bg);
+    height: 100%;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Status bar (preto, fino) */
+  .rs-statusbar {
+    height: 22px;
+    background: #000;
+    padding: 0 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 9.5px;
+    flex-shrink: 0;
+  }
+
+  .rs-signal {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    font-size: 8px;
+  }
+
+  .rs-batt {
+    width: 14px; height: 7px;
+    border: 1px solid #fff;
+    border-radius: 1.5px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1px;
+    margin-left: 2px;
+  }
+
+  .rs-batt::after {
+    content: '';
+    width: 80%; height: 100%;
+    background: #fff;
+    border-radius: 1px;
+  }
+
+  /* App bar — azul marinho profundo (cor real do app) */
+  .rs-appbar {
+    background: var(--rs-navy);
+    color: #fff;
+    height: 38px;
+    padding: 0 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+  }
+
+  .rs-back {
+    width: 16px; height: 16px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .rs-app-title {
+    flex: 1;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    margin-right: 16px; /* compensa o ícone à esquerda */
+  }
+
+  .rs-search-icon {
+    width: 14px; height: 14px;
+    border: 1.5px solid #fff;
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .rs-search-icon::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; right: -3px;
+    width: 5px; height: 1.5px;
+    background: #fff;
+    transform: rotate(45deg);
+    border-radius: 1px;
+  }
+
+  /* Search field area (cinza claro) */
+  .rs-search-row {
+    background: var(--rs-soft);
+    padding: 0.6rem 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .rs-search {
+    background: #fff;
+    border-radius: 4px;
+    padding: 0.5rem 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--rs-dim);
+    font-size: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  .rs-search-q {
+    color: var(--rs-navy);
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Body */
+  .rs-body {
+    flex: 1;
+    padding: 0.85rem 0.8rem 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rs-h2 {
+    text-align: center;
+    color: var(--rs-navy);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .rs-group {
+    border: 1px solid var(--rs-divider);
+    border-radius: 4px;
+    padding: 0.5rem 0.6rem 0.6rem;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rs-group-title {
+    color: var(--rs-navy);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    margin-bottom: 0.55rem;
+    flex-shrink: 0;
+  }
+
+  .rs-services {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    overflow: hidden;
+  }
+
+  .rs-service-btn {
+    background: var(--rs-navy);
+    color: #fff;
+    text-align: center;
+    padding: 0.55rem 0.5rem;
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .rs-service-btn.alt {
+    background: var(--rs-navy-soft);
+  }
+
+  /* Bottom tabs (real: Criar Orçamento · Assinatura, ou na detalhada: Salvar · PDF · Compartilhar) */
+  .rs-tabs {
+    background: #fff;
+    border-top: 1px solid var(--rs-divider);
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem 0 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .rs-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 8.5px;
+    color: var(--rs-navy);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+
+  .rs-tab-icon {
+    width: 18px; height: 18px;
+    background: var(--rs-navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  .rs-tab-icon.check::after  { content: '✓'; font-size: 10px; }
+  .rs-tab-icon.gear::after   { content: '⚙'; font-size: 10px; }
+  .rs-tab-icon.menu::after   { content: '☰'; font-size: 10px; }
+
+  /* Caption under device */
+  .device-caption {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-mute);
+  }
+
+  .device-caption::before {
+    content: '↑ ';
+    color: var(--accent);
+  }
+
+  .project-visual-wrap {
+    display: flex;
+    flex-direction: column;
     align-items: center;
   }
 
-  /* ========== CAROUSEL ========== */
-  .carousel-container {
-    position: relative;
-    width: 300px !important;
-    height: 580px !important;
-    border-radius: 24px;
-    box-shadow: 0 35px 80px rgba(0,0,0,0.45);
-    overflow: hidden;
-    background: var(--bg-soft);
-    border: 1px solid var(--line);
-    display: block !important;
-  }
-
-  .carousel-images {
-    position: relative;
-    width: 100% !important;
-    height: 100% !important;
-    display: block !important;
-    overflow: hidden;
-  }
-
-  /* Carousel image styling */
-  .carousel-image {
+  /* When user replaces with real screenshot: */
+  .device-img {
+    max-width: 300px;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.5s ease-in-out;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
+    border-radius: 28px;
+    box-shadow: 0 35px 80px rgba(0,0,0,0.45);
+    transform: rotate(-3deg);
+    transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
   }
+  .device-img:hover { transform: rotate(0) scale(1.03); }
 
-  .carousel-image.active {
-    opacity: 1;
-  }
-
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: linear-gradient(to top, var(--bg-soft), transparent);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: none;
-    background: var(--text-mute);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0;
-  }
-
-  .dot:hover {
-    background: var(--accent);
-    transform: scale(1.2);
-  }
-
-  .dot:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-    background: var(--accent);
-    transform: scale(1.2);
-  }
-
-  .dot.active {
-    background: var(--accent);
-  }
-
-  /* Responsive carousel */
-  @media (max-width: 880px) {
-    .project-visual {
-      height: auto;
-      min-height: 480px;
-    }
-    .carousel-container {
-      max-width: 250px;
-      height: 480px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .carousel-container {
-      max-width: 200px;
-      height: 385px;
-    }
-
-    .dot {
-      width: 6px;
-      height: 6px;
-    }
-  }
-
-
-  /* ------ Project copy ------ */
+  /* Project copy */
   .project-tag {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
@@ -972,6 +1154,8 @@
 
     .stat-row { gap: 1.5rem; }
     .hero-meta { gap: 1rem 1.5rem; }
+
+    .device { width: 250px; }
   }
 </style>
 </head>
@@ -1148,45 +1332,72 @@
     <h2 class="section-title reveal d1">Um app nascido no Acre, usado em todo o Brasil.</h2>
 
     <div class="project">
-      <!--
-        ============================================================
-        ÁREA DO SCREENSHOT DO APP
-        ------------------------------------------------------------
-        Para trocar pela imagem REAL do Reforma Simples:
-        1. Remova toda a <div class="device">...</div> abaixo.
-        2. Substitua por:
-           <img src="caminho/screenshot.png"
-                alt="Tela do app Reforma Simples"
-                style="max-width: 300px; border-radius: 24px;
-                       box-shadow: 0 35px 80px rgba(0,0,0,0.45);
-                       transform: rotate(-3deg);">
-        ============================================================
-      -->
       <div class="project-visual reveal d1">
-        <div class="carousel-container">
-          <div class="carousel-images">
-            <!-- f1.png - Tela Principal -->
-            <img src="images/f1.png" alt="Reforma Simples - Tela Principal com logo e botões de navegação" class="carousel-image active">
+        <div class="project-visual-wrap">
+          <div class="device">
+            <div class="device-notch"></div>
+            <div class="device-screen">
 
-            <!-- f2.png - Lista de Materiais -->
-            <img src="images/f2.png" alt="Reforma Simples - Lista de Materiais de construção" class="carousel-image">
+              <!-- Status bar -->
+              <div class="rs-statusbar">
+                <span>12:17</span>
+                <div class="rs-signal">
+                  <span>5G</span>
+                  <div class="rs-batt"></div>
+                </div>
+              </div>
 
-            <!-- f3.png - Calculadora -->
-            <img src="images/f3.png" alt="Reforma Simples - Calculadora de Materiais com categorias" class="carousel-image">
+              <!-- App bar (azul marinho real do app) -->
+              <div class="rs-appbar">
+                <div class="rs-back">←</div>
+                <div class="rs-app-title">Reforma Simples</div>
+                <div class="rs-search-icon"></div>
+              </div>
 
-            <!-- f4.png - Resultados -->
-            <img src="images/f4.png" alt="Reforma Simples - Resultado do Cálculo com quantidades" class="carousel-image">
+              <!-- Search field -->
+              <div class="rs-search-row">
+                <div class="rs-search">
+                  <span class="rs-search-q">Q</span>
+                  <span>Pesquise o serviço pelo nome</span>
+                </div>
+              </div>
 
-            <!-- f5.png - Configurações -->
-            <img src="images/f5.png" alt="Reforma Simples - Tela de Configurações do aplicativo" class="carousel-image">
+              <!-- Body -->
+              <div class="rs-body">
+                <div class="rs-h2">Selecione um tipo de serviço</div>
+
+                <div class="rs-group">
+                  <div class="rs-group-title">1. Serviços Iniciais</div>
+                  <div class="rs-services">
+                    <div class="rs-service-btn alt">Tapume/fechamentos de obra</div>
+                    <div class="rs-service-btn">Canteiro da obra</div>
+                    <div class="rs-service-btn">Locação da obra</div>
+                    <div class="rs-service-btn">Limpeza e preparo do terreno</div>
+                    <div class="rs-service-btn">Escavações</div>
+                    <div class="rs-service-btn">Reaterro</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bottom tabs (reais do app: Exibir · Salvar · Configuração) -->
+              <div class="rs-tabs">
+                <div class="rs-tab">
+                  <div class="rs-tab-icon menu"></div>
+                  <span>Exibir</span>
+                </div>
+                <div class="rs-tab">
+                  <div class="rs-tab-icon check"></div>
+                  <span>Salvar</span>
+                </div>
+                <div class="rs-tab">
+                  <div class="rs-tab-icon gear"></div>
+                  <span>Config</span>
+                </div>
+              </div>
+
+            </div>
           </div>
-          <div class="carousel-dots">
-            <button class="dot active" data-slide="0" aria-label="Ver primeira tela"></button>
-            <button class="dot" data-slide="1" aria-label="Ver segunda tela"></button>
-            <button class="dot" data-slide="2" aria-label="Ver terceira tela"></button>
-            <button class="dot" data-slide="3" aria-label="Ver quarta tela"></button>
-            <button class="dot" data-slide="4" aria-label="Ver quinta tela"></button>
-          </div>
+          <div class="device-caption">tela real do app · seleção de serviços</div>
         </div>
       </div>
 
@@ -1199,7 +1410,7 @@
 
         <ul class="project-features reveal d3">
           <li><span><strong>Preços oficiais do SINAPI</strong> — usa o Sistema Nacional de Pesquisa de Custos da Caixa Econômica, atualizados periodicamente por estado.</span></li>
-          <li><span><strong>Relatório exportável em Excel e PDF</strong> — resumo completo da obra para enviar ao cliente ou fornecedor.</span></li>
+          <li><span><strong>Relatório exportável em Excel e PDF</strong> — orçamento detalhado com materiais, mão de obra e total, pronto para enviar ao cliente.</span></li>
           <li><span><strong>Versão web e plano Pro</strong> — disponível como app mobile, versão web e assinatura Pro com serviços exclusivos e atualização mensal de preços.</span></li>
         </ul>
 
@@ -1339,87 +1550,6 @@
 </footer>
 
 <script>
-// Carousel functionality
-// Initialize carousel when DOM is loaded - FIXED VERSION
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, initializing carousel...');
-
-  const carouselContainer = document.querySelector('.carousel-container');
-  if (!carouselContainer) {
-    console.error('Carousel container not found!');
-    return;
-  }
-
-  const slides = carouselContainer.querySelectorAll('.carousel-image');
-  const dots = carouselContainer.querySelectorAll('.dot');
-
-  console.log('Found', slides.length, 'slides and', dots.length, 'dots');
-
-  if (slides.length === 0 || dots.length === 0) {
-    console.error('Slides or dots not found!');
-    return;
-  }
-
-  // Ensure first slide is active
-  slides[0].classList.add('active');
-  dots[0].classList.add('active');
-
-  console.log('First slide active class applied');
-
-  let currentSlide = 0;
-  let autoPlayTimer = null;
-
-  function goToSlide(slideIndex) {
-    console.log('Going to slide', slideIndex);
-
-    // Remove active from all
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-
-    // Add active to current
-    slides[slideIndex].classList.add('active');
-    dots[slideIndex].classList.add('active');
-
-    currentSlide = slideIndex;
-  }
-
-  function nextSlide() {
-    const next = (currentSlide + 1) % slides.length;
-    goToSlide(next);
-  }
-
-  function startAutoPlay() {
-    autoPlayTimer = setInterval(nextSlide, 4000);
-  }
-
-  function pauseAutoPlay() {
-    if (autoPlayTimer) {
-      clearInterval(autoPlayTimer);
-      autoPlayTimer = null;
-    }
-  }
-
-  function resumeAutoPlay() {
-    if (!autoPlayTimer) {
-      startAutoPlay();
-    }
-  }
-
-  // Add dot click handlers
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => goToSlide(index));
-  });
-
-  // Add hover handlers
-  carouselContainer.addEventListener('mouseenter', pauseAutoPlay);
-  carouselContainer.addEventListener('mouseleave', resumeAutoPlay);
-
-  // Start auto-play
-  startAutoPlay();
-
-  console.log('Carousel initialized successfully');
-});
-
   const root = document.documentElement;
   const btn = document.getElementById('themeToggle');
   const icon = document.getElementById('themeIcon');
