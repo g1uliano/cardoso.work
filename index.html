@@ -3,16 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Giuliano Cardoso — Desenvolvedor de Software [TEST BUILD]</title>
+<title>Giuliano Cardoso — Desenvolvedor de Software</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<!-- Preload carousel images -->
+<!-- Preload only first carousel image -->
 <link rel="preload" as="image" href="images/f1.png">
-<link rel="preload" as="image" href="images/f2.png">
-<link rel="preload" as="image" href="images/f3.png">
-<link rel="preload" as="image" href="images/f4.png">
-<link rel="preload" as="image" href="images/f5.png">
 <style>
   /* ========== THEMES ========== */
   :root[data-theme="dark"] {
@@ -1337,11 +1333,15 @@ class ImageCarousel {
     this.currentSlide = 0;
     this.autoPlayTimer = null;
     this.isPlaying = true;
+    this.imageLoadedStatus = new Array(this.images.length).fill(false);
 
     this.init();
   }
 
   init() {
+    // Mark first image as loaded since it's preloaded
+    this.imageLoadedStatus[0] = true;
+
     // Add event listeners for dots
     this.dots.forEach((dot, index) => {
       dot.addEventListener('click', () => this.goToSlide(index));
@@ -1359,8 +1359,32 @@ class ImageCarousel {
     this.container.addEventListener('mouseenter', () => this.pauseAutoPlay());
     this.container.addEventListener('mouseleave', () => this.resumeAutoPlay());
 
+    // Preload next image
+    this.preloadImage(1);
+
     // Start auto-play
     this.startAutoPlay();
+  }
+
+  preloadImage(index) {
+    if (index >= this.images.length || this.imageLoadedStatus[index]) {
+      return;
+    }
+
+    const img = this.images[index];
+    if (img.complete && img.naturalHeight !== 0) {
+      this.imageLoadedStatus[index] = true;
+      return;
+    }
+
+    img.addEventListener('load', () => {
+      this.imageLoadedStatus[index] = true;
+    }, { once: true });
+
+    img.addEventListener('error', () => {
+      console.warn(`Failed to load carousel image: ${img.src}`);
+      this.imageLoadedStatus[index] = true; // Mark as processed to avoid retry
+    }, { once: true });
   }
 
   goToSlide(slideIndex) {
@@ -1371,9 +1395,18 @@ class ImageCarousel {
     // Update current slide index
     this.currentSlide = slideIndex;
 
+    // Preload current image if not loaded
+    this.preloadImage(this.currentSlide);
+
     // Add active class to new slide and dot
     this.images[this.currentSlide].classList.add('active');
     this.dots[this.currentSlide].classList.add('active');
+
+    // Preload next images (current + 1 and + 2)
+    const nextIndex = (this.currentSlide + 1) % this.images.length;
+    const nextNextIndex = (this.currentSlide + 2) % this.images.length;
+    this.preloadImage(nextIndex);
+    this.preloadImage(nextNextIndex);
   }
 
   nextSlide() {
