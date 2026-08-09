@@ -49,18 +49,6 @@
     --accent-3:  #0969da;
   }
 
-  /* Reforma Simples brand colors — fixed (real app palette: deep navy + white) */
-  :root {
-    --rs-navy:      #0e2b6e;
-    --rs-navy-soft: #1f3a85;
-    --rs-blue:      #1565d8;
-    --rs-bg:        #ffffff;
-    --rs-soft:      #eef0f4;
-    --rs-ink:       #1c1c1c;
-    --rs-dim:       #6b6b6b;
-    --rs-divider:   #d8d8d8;
-  }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
 
@@ -552,312 +540,142 @@
     background: var(--bg);
   }
 
-  /* ========== FEATURED PROJECT ========== */
-  .project {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .project-visual {
-    display: flex;
-    justify-content: center;
-    position: relative;
-  }
-
-  /* ============================================================
-     DEVICE MOCKUP — fiel ao app real Reforma Simples
-     Tela mostrada: "Selecione um tipo de serviço"
-     Para trocar pelo screenshot real:
-     1. Substitua o bloco <div class="device">...</div>
-        por <img src="caminho.png" alt="Tela do Reforma Simples"
-             class="device-img">
-     ============================================================ */
-  .device {
-    width: 300px;
-    aspect-ratio: 9/19.5;
-    background: #0a0a0a;
-    border-radius: 40px;
-    padding: 10px;
-    position: relative;
-    box-shadow:
-      0 35px 80px rgba(0,0,0,0.45),
-      0 0 0 2px #2a2a2a,
-      inset 0 0 0 2px #1a1a1a;
-    transform: rotate(-3deg);
-    transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
-    flex-shrink: 0;
-  }
-
-  .device:hover { transform: rotate(0) scale(1.03); }
-
-  .device-notch {
-    position: absolute;
-    top: 14px; left: 50%;
-    transform: translateX(-50%);
-    width: 95px; height: 26px;
-    background: #000;
-    border-radius: 0 0 16px 16px;
-    z-index: 5;
-  }
-
-  .device-screen {
-    background: var(--rs-bg);
-    height: 100%;
-    border-radius: 30px;
-    overflow: hidden;
-    position: relative;
+  /* ========== PRODUCTS ========== */
+  .products {
     display: flex;
     flex-direction: column;
+    gap: 3rem;
   }
 
-  /* Status bar (preto, fino) */
-  .rs-statusbar {
-    height: 22px;
-    background: #000;
-    padding: 0 1.1rem;
+  .product {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg-soft);
+    padding: 2.25rem;
+    scroll-margin-top: 80px;
+  }
+
+  .product-head {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 9.5px;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+
+  .product-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 13px;
+    border: 1px solid var(--line);
+    background: var(--bg);
     flex-shrink: 0;
   }
 
-  .rs-signal {
-    display: inline-flex;
-    gap: 4px;
-    align-items: center;
-    font-size: 8px;
-  }
-
-  .rs-batt {
-    width: 14px; height: 7px;
-    border: 1px solid #fff;
-    border-radius: 1.5px;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1px;
-    margin-left: 2px;
-  }
-
-  .rs-batt::after {
-    content: '';
-    width: 80%; height: 100%;
-    background: #fff;
-    border-radius: 1px;
-  }
-
-  /* App bar — azul marinho profundo (cor real do app) */
-  .rs-appbar {
-    background: var(--rs-navy);
-    color: #fff;
-    height: 38px;
-    padding: 0 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    flex-shrink: 0;
-  }
-
-  .rs-back {
-    width: 16px; height: 16px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
+  .product-head h3 {
+    font-size: clamp(1.7rem, 3.2vw, 2.3rem);
     font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
   }
 
-  .rs-app-title {
-    flex: 1;
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    margin-right: 16px; /* compensa o ícone à esquerda */
-  }
+  .product-head h3 .acc { color: var(--accent); }
 
-  .rs-search-icon {
-    width: 14px; height: 14px;
-    border: 1.5px solid #fff;
-    border-radius: 50%;
-    position: relative;
-    flex-shrink: 0;
-  }
-
-  .rs-search-icon::after {
-    content: '';
-    position: absolute;
-    bottom: -3px; right: -3px;
-    width: 5px; height: 1.5px;
-    background: #fff;
-    transform: rotate(45deg);
-    border-radius: 1px;
-  }
-
-  /* Search field area (cinza claro) */
-  .rs-search-row {
-    background: var(--rs-soft);
-    padding: 0.6rem 0.8rem;
-    flex-shrink: 0;
-  }
-
-  .rs-search {
-    background: #fff;
-    border-radius: 4px;
-    padding: 0.5rem 0.7rem;
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    color: var(--rs-dim);
-    font-size: 10px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  }
-
-  .rs-search-q {
-    color: var(--rs-navy);
-    font-weight: 700;
-    font-size: 12px;
-    flex-shrink: 0;
-  }
-
-  /* Body */
-  .rs-body {
-    flex: 1;
-    padding: 0.85rem 0.8rem 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .rs-h2 {
-    text-align: center;
-    color: var(--rs-navy);
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    margin-bottom: 0.7rem;
-    flex-shrink: 0;
-  }
-
-  .rs-group {
-    border: 1px solid var(--rs-divider);
-    border-radius: 4px;
-    padding: 0.5rem 0.6rem 0.6rem;
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .rs-group-title {
-    color: var(--rs-navy);
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
+  .product-badge {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    margin-bottom: 0.55rem;
-    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.35rem 0.7rem;
+    border-radius: 100px;
+    border: 1px solid var(--line);
+    color: var(--text-mute);
+    white-space: nowrap;
   }
 
-  .rs-services {
+  .product-badge.live {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
+  .product-badge.soon {
+    color: var(--accent-2);
+    border-color: color-mix(in srgb, var(--accent-2) 45%, transparent);
+  }
+
+  .product .project-lead { max-width: 76ch; }
+
+  .project-credit {
+    max-width: 76ch;
+    margin-top: -0.5rem;
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--accent-2);
+    color: var(--text-dim);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+
+  .project-credit strong { color: var(--text); font-weight: 600; }
+
+  /* Faixa de capturas — rolagem horizontal nativa com scroll-snap */
+  .shots {
     display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    overflow: hidden;
+    gap: 1rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    padding: 0.25rem 0.25rem 1rem;
+    margin: 1.75rem 0 1.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
   }
 
-  .rs-service-btn {
-    background: var(--rs-navy);
-    color: #fff;
-    text-align: center;
-    padding: 0.55rem 0.5rem;
-    border-radius: 3px;
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    line-height: 1.2;
+  .shots:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 4px;
   }
 
-  .rs-service-btn.alt {
-    background: var(--rs-navy-soft);
+  .shot {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
   }
 
-  /* Bottom tabs (real: Criar Orçamento · Assinatura, ou na detalhada: Salvar · PDF · Compartilhar) */
-  .rs-tabs {
-    background: #fff;
-    border-top: 1px solid var(--rs-divider);
-    display: flex;
-    justify-content: space-around;
-    padding: 0.5rem 0 0.7rem;
-    flex-shrink: 0;
+  .shot img {
+    display: block;
+    height: 400px;
+    width: auto;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--bg);
   }
 
-  .rs-tab {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    font-size: 8.5px;
-    color: var(--rs-navy);
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-  }
-
-  .rs-tab-icon {
-    width: 18px; height: 18px;
-    background: var(--rs-navy);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-weight: 700;
-    font-size: 11px;
-    line-height: 1;
-  }
-
-  .rs-tab-icon.check::after  { content: '✓'; font-size: 10px; }
-  .rs-tab-icon.gear::after   { content: '⚙'; font-size: 10px; }
-  .rs-tab-icon.menu::after   { content: '☰'; font-size: 10px; }
-
-  /* Caption under device */
-  .device-caption {
-    margin-top: 1.5rem;
-    text-align: center;
+  .shot figcaption {
+    margin-top: 0.65rem;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--text-mute);
+    text-align: center;
   }
 
-  .device-caption::before {
-    content: '↑ ';
-    color: var(--accent);
+  /* só aparece nas larguras em que a faixa realmente transborda */
+  .shots-note {
+    display: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-mute);
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
   }
 
-  .project-visual-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  .shots-note::before { content: '↔ '; color: var(--accent); }
 
-  /* When user replaces with real screenshot: */
-  .device-img {
-    max-width: 300px;
-    width: 100%;
-    border-radius: 28px;
-    box-shadow: 0 35px 80px rgba(0,0,0,0.45);
-    transform: rotate(-3deg);
-    transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+  .project-features.cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 0 2.5rem;
   }
-  .device-img:hover { transform: rotate(0) scale(1.03); }
 
   /* Project copy */
   .project-tag {
@@ -1158,7 +976,12 @@
     .hero { padding: 3.5rem 0 3rem; }
     .section, .contact { padding: 3.5rem 0; }
 
-    .about-grid, .project, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .product { padding: 1.5rem; }
+    .product-icon { width: 46px; height: 46px; border-radius: 11px; }
+    .product-badge { margin-left: 0; }
+    .shot img { height: 300px; }
+    .shots-note { display: block; }
 
     .press-item {
       grid-template-columns: 1fr auto;
@@ -1175,8 +998,6 @@
 
     .stat-row { gap: 1.5rem; }
     .hero-meta { gap: 1rem 1.5rem; }
-
-    .device { width: 250px; }
   }
 </style>
 </head>
@@ -1191,7 +1012,7 @@
     </a>
     <nav class="nav-links">
       <a href="#about">Sobre</a>
-      <a href="#work">Projeto</a>
+      <a href="#work">Apps</a>
       <a href="#press">Imprensa</a>
       <a href="#contact">Contato</a>
       <button class="theme-toggle" id="themeToggle" aria-label="alternar tema">
@@ -1213,7 +1034,7 @@
     <h1 class="reveal d1">Construo software que <span class="accent">funciona</span></h1>
 
     <p class="hero-lede reveal d2">
-      Sou <strong>Giuliano Cardoso</strong>, desenvolvedor de software. Projeto, desenvolvo, mantenho e implanto <strong>sistemas web</strong> e <strong>aplicativos para Android e iOS</strong> — do planejamento à entrega final ao usuário.
+      Sou <strong>Giuliano Cardoso</strong>, desenvolvedor de software. Projeto, desenvolvo, mantenho e implanto <strong>sistemas web</strong> e <strong>aplicativos para Android e iOS</strong> — do planejamento à entrega final ao usuário. Hoje mantenho três produtos próprios: <strong>Reforma Simples</strong> e <strong>Olha o Bichim!</strong> nas lojas, e o <strong>Constructus</strong>, que chega em breve.
     </p>
 
     <div class="hero-meta reveal d3">
@@ -1226,13 +1047,13 @@
         <strong>Web &amp; Mobile</strong>
       </div>
       <div class="item">
-        <span>Em produção desde</span>
-        <strong>2014</strong>
+        <span>Apps próprios</span>
+        <strong>3 — em produção desde 2014</strong>
       </div>
     </div>
 
     <div class="hero-actions reveal d4">
-      <a href="#work" class="btn primary">Ver projeto em destaque <span class="arrow">→</span></a>
+      <a href="#work" class="btn primary">Ver os aplicativos <span class="arrow">→</span></a>
       <a href="#contact" class="btn">Entrar em contato <span class="arrow">↗</span></a>
     </div>
   </div>
@@ -1296,6 +1117,10 @@
             <span class="value acc">100.000+</span>
           </div>
           <div class="stat-item">
+            <span class="label">Apps próprios publicados</span>
+            <span class="value acc">3</span>
+          </div>
+          <div class="stat-item">
             <span class="label">App em produção desde</span>
             <span class="value">2014</span>
           </div>
@@ -1346,96 +1171,58 @@
   </div>
 </section>
 
-<!-- FEATURED PROJECT -->
+<!-- PRODUCTS -->
 <section class="section" id="work">
   <div class="container">
-    <div class="section-label reveal">02 · Projeto em destaque</div>
-    <h2 class="section-title reveal d1">Um app nascido no Acre, usado em todo o Brasil.</h2>
+    <div class="section-label reveal">02 · Aplicativos</div>
+    <h2 class="section-title reveal d1">Três produtos próprios, do Acre para o Brasil.</h2>
+    <p class="section-intro reveal d2">Dois já em produção nas lojas e um a caminho. Todos projetados, desenvolvidos, publicados e mantidos por mim — do banco de dados à tela.</p>
 
-    <div class="project">
-      <div class="project-visual reveal d1">
-        <div class="project-visual-wrap">
-          <div class="device">
-            <div class="device-notch"></div>
-            <div class="device-screen">
+    <div class="products">
 
-              <!-- Status bar -->
-              <div class="rs-statusbar">
-                <span>12:17</span>
-                <div class="rs-signal">
-                  <span>5G</span>
-                  <div class="rs-batt"></div>
-                </div>
-              </div>
-
-              <!-- App bar (azul marinho real do app) -->
-              <div class="rs-appbar">
-                <div class="rs-back">←</div>
-                <div class="rs-app-title">Reforma Simples</div>
-                <div class="rs-search-icon"></div>
-              </div>
-
-              <!-- Search field -->
-              <div class="rs-search-row">
-                <div class="rs-search">
-                  <span class="rs-search-q">Q</span>
-                  <span>Pesquise o serviço pelo nome</span>
-                </div>
-              </div>
-
-              <!-- Body -->
-              <div class="rs-body">
-                <div class="rs-h2">Selecione um tipo de serviço</div>
-
-                <div class="rs-group">
-                  <div class="rs-group-title">1. Serviços Iniciais</div>
-                  <div class="rs-services">
-                    <div class="rs-service-btn alt">Tapume/fechamentos de obra</div>
-                    <div class="rs-service-btn">Canteiro da obra</div>
-                    <div class="rs-service-btn">Locação da obra</div>
-                    <div class="rs-service-btn">Limpeza e preparo do terreno</div>
-                    <div class="rs-service-btn">Escavações</div>
-                    <div class="rs-service-btn">Reaterro</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Bottom tabs (reais do app: Exibir · Salvar · Configuração) -->
-              <div class="rs-tabs">
-                <div class="rs-tab">
-                  <div class="rs-tab-icon menu"></div>
-                  <span>Exibir</span>
-                </div>
-                <div class="rs-tab">
-                  <div class="rs-tab-icon check"></div>
-                  <span>Salvar</span>
-                </div>
-                <div class="rs-tab">
-                  <div class="rs-tab-icon gear"></div>
-                  <span>Config</span>
-                </div>
-              </div>
-
-            </div>
+      <!-- ========== REFORMA SIMPLES ========== -->
+      <article class="product reveal" id="reforma-simples">
+        <header class="product-head">
+          <img class="product-icon" src="images/apps/icon-rs.png" alt="Ícone do aplicativo Reforma Simples" width="58" height="58" loading="lazy" decoding="async">
+          <div>
+            <div class="project-tag">Produto próprio · desde 2014</div>
+            <h3>Reforma <span class="acc">Simples</span></h3>
           </div>
-          <div class="device-caption">tela real do app · seleção de serviços</div>
-        </div>
-      </div>
+          <span class="product-badge live">Em produção</span>
+        </header>
 
-      <div class="project-info">
-        <div class="project-tag reveal">Produto próprio · lançado em 2014</div>
-        <h3 class="reveal d1">Reforma <span class="acc">Simples</span></h3>
-        <p class="project-lead reveal d2">
-          Aplicativo que calcula a quantidade e o preço estimado dos materiais para diversos serviços de construção ou reforma. Feito para <strong>pedreiros, mestres de obra, arquitetos e donos de casa</strong> que precisam de um orçamento rápido e confiável — sem planilha.
+        <p class="project-lead">
+          Aplicativo que calcula a quantidade e o preço estimado dos materiais para serviços de construção e reforma, usando os preços oficiais do <strong>SINAPI</strong>. Feito para <strong>pedreiros, mestres de obra, engenheiros, arquitetos e donos de casa</strong> que precisam de um orçamento rápido e confiável — sem planilha.
         </p>
 
-        <ul class="project-features reveal d3">
-          <li><span><strong>Preços oficiais do SINAPI</strong> — usa o Sistema Nacional de Pesquisa de Custos da Caixa Econômica, atualizados periodicamente por estado.</span></li>
-          <li><span><strong>Relatório exportável em Excel e PDF</strong> — orçamento detalhado com materiais, mão de obra e total, pronto para enviar ao cliente.</span></li>
-          <li><span><strong>Versão web e plano Pro</strong> — disponível como app mobile, versão web e assinatura Pro com serviços exclusivos e atualização mensal de preços.</span></li>
+        <div class="shots" tabindex="0" role="group" aria-label="Capturas de tela do Reforma Simples">
+          <figure class="shot">
+            <img src="images/apps/rs-1.webp" alt="Tela do Reforma Simples com a lista de tipos de serviço, começando por Serviços Iniciais" loading="lazy" decoding="async">
+            <figcaption>Seleção de serviços</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/apps/rs-2.webp" alt="Formulário de depósito em canteiro de obra com campo de área em metros quadrados e a lista de insumos necessários" loading="lazy" decoding="async">
+            <figcaption>Cálculo do serviço</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/apps/rs-3.webp" alt="Orçamento preliminar do Reforma Simples com tabela de materiais, preço, quantidade e total" loading="lazy" decoding="async">
+            <figcaption>Orçamento preliminar</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/apps/rs-4.webp" alt="Tela de preços por estado, com seletor de estado e mês de referência do SINAPI" loading="lazy" decoding="async">
+            <figcaption>Preços por estado</figcaption>
+          </figure>
+        </div>
+        <p class="shots-note">arraste para ver todas as telas</p>
+
+        <ul class="project-features cols">
+          <li><span><strong>Preços oficiais do SINAPI</strong> — Sistema Nacional de Pesquisa de Custos da Caixa Econômica Federal, por estado e mês de referência.</span></li>
+          <li><span><strong>Centenas de serviços</strong> — dos serviços iniciais e fundações a alvenaria, cobertura, revestimentos, elétrica e hidráulica.</span></li>
+          <li><span><strong>Exportação em Excel e PDF</strong> — orçamento detalhado com materiais, mão de obra e total, pronto para enviar ao cliente.</span></li>
+          <li><span><strong>Versão web e plano Pro</strong> — app mobile, versão no navegador e assinatura com tabelas exclusivas e atualização mensal de preços.</span></li>
         </ul>
 
-        <div class="stat-row reveal d3">
+        <div class="stat-row">
           <div class="stat">
             <span class="num">100K<span class="plus">+</span></span>
             <span class="label">Downloads na Play Store</span>
@@ -1450,12 +1237,132 @@
           </div>
         </div>
 
-        <div class="project-actions reveal d4">
-          <a href="https://reformasimples.com" target="_blank" rel="noopener" class="btn primary">Site do app <span class="arrow">→</span></a>
+        <div class="project-actions">
+          <a href="https://reformasimples.com" target="_blank" rel="noopener" class="btn primary">Site oficial <span class="arrow">→</span></a>
           <a href="https://web.reformasimples.com" target="_blank" rel="noopener" class="btn">Versão web <span class="arrow">↗</span></a>
           <a href="https://play.google.com/store/apps/details?id=com.uninorte.orcafacil" target="_blank" rel="noopener" class="btn">Play Store <span class="arrow">↗</span></a>
         </div>
-      </div>
+      </article>
+
+      <!-- ========== OLHA O BICHIM! ========== -->
+      <article class="product reveal" id="olha-o-bichim">
+        <header class="product-head">
+          <img class="product-icon" src="images/apps/icon-ob.png" alt="Ícone do jogo Olha o Bichim!" width="58" height="58" loading="lazy" decoding="async">
+          <div>
+            <div class="project-tag">Produto próprio · jogo</div>
+            <h3>Olha o <span class="acc">Bichim!</span></h3>
+          </div>
+          <span class="product-badge live">Android e iOS</span>
+        </header>
+
+        <p class="project-lead">
+          Puzzle no estilo <strong>2048</strong> com a fauna brasileira. Deslize o dedo para juntar bichos iguais no tabuleiro 4×4 e faça cada dupla evoluir para uma espécie mais rara — da <strong>Tanajura</strong> até a <strong>Capivara Lendária</strong>, passando pelo Cerrado, pela Amazônia, pelo Pantanal e pela Mata Atlântica.
+        </p>
+
+        <div class="shots" tabindex="0" role="group" aria-label="Capturas de tela do jogo Olha o Bichim!">
+          <figure class="shot">
+            <img src="images/apps/ob-1.webp" alt="Tela inicial do Olha o Bichim com o título em letras alaranjadas sobre uma floresta e os botões Continuar Jogo e Novo Jogo" loading="lazy" decoding="async">
+            <figcaption>Tela inicial</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/apps/ob-2.webp" alt="Partida em andamento com tabuleiro 4x4 de peças de animais, pontuação e itens de bomba e desfazer" loading="lazy" decoding="async">
+            <figcaption>Partida</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/apps/ob-3.webp" alt="Álbum de coleção mostrando Tanajura, Lobo-guará, Sapo-cururu, Tucano, Sagui e Preguiça desbloqueados" loading="lazy" decoding="async">
+            <figcaption>Coleção de animais</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/apps/ob-4.webp" alt="Tela de recompensa diária com trilha de sete dias e o botão Coletar recompensa" loading="lazy" decoding="async">
+            <figcaption>Recompensa diária</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/apps/ob-5.webp" alt="Ranking do jogo com abas Pessoal, Global e Lendas, ordenado por tempo e por pontuação" loading="lazy" decoding="async">
+            <figcaption>Ranking global</figcaption>
+          </figure>
+        </div>
+        <p class="shots-note">arraste para ver todas as telas</p>
+
+        <ul class="project-features cols">
+          <li><span><strong>13 animais reais dos biomas brasileiros</strong> — Tanajura, Lobo-guará, Sapo-cururu, Tucano, Sagui, Preguiça, Mico-leão-dourado, Boto-cor-de-rosa, Onça-pintada, Sucuri, a Capivara Lendária (2048), o Peixe-boi (4096) e o Jacaré (8192).</span></li>
+          <li><span><strong>Bomba e desfazer</strong> — itens para limpar uma área do tabuleiro quando ele trava, ou voltar a última jogada.</span></li>
+          <li><span><strong>Desafio diário e coleção</strong> — partida com seed por data e streak, além de um álbum que desbloqueia a cada bicho novo descoberto.</span></li>
+          <li><span><strong>Ranking global semanal</strong> — top 50 por tempo até 2048, com reinício todo sábado às 18h e um hall das Lendas.</span></li>
+          <li><span><strong>Recompensas diárias</strong> — vidas, bombas e desfazeres coletados todo dia, com bônus por recorde e por convite.</span></li>
+          <li><span><strong>Feito em Flutter</strong> — Android e iOS a partir de uma base de código única, com som próprio para cada bicho, feedback háptico e localização em PT-BR e EN.</span></li>
+        </ul>
+
+        <div class="stat-row">
+          <div class="stat">
+            <span class="num">13</span>
+            <span class="label">Animais colecionáveis</span>
+          </div>
+          <div class="stat">
+            <span class="num">2</span>
+            <span class="label">Lojas · Android e iOS</span>
+          </div>
+          <div class="stat">
+            <span class="num">8192</span>
+            <span class="label">Peça máxima · o Jacaré</span>
+          </div>
+        </div>
+
+        <div class="project-actions">
+          <a href="https://olhaobichim.com.br" target="_blank" rel="noopener" class="btn primary">Site oficial <span class="arrow">→</span></a>
+          <a href="https://play.google.com/store/apps/details?id=com.catraia.capivara2048" target="_blank" rel="noopener" class="btn">Baixar na Play Store <span class="arrow">↗</span></a>
+          <a href="https://apps.apple.com/br/app/olha-o-bichim/id6792538190" target="_blank" rel="noopener" class="btn">Baixar na App Store <span class="arrow">↗</span></a>
+        </div>
+      </article>
+
+      <!-- ========== CONSTRUCTUS ========== -->
+      <article class="product reveal" id="constructus">
+        <header class="product-head">
+          <img class="product-icon" src="images/apps/icon-ct.png" alt="Ícone do aplicativo Constructus" width="58" height="58" loading="lazy" decoding="async">
+          <div>
+            <div class="project-tag">Próximo lançamento</div>
+            <h3>Construc<span class="acc">tus</span></h3>
+          </div>
+          <span class="product-badge soon">Em breve</span>
+        </header>
+
+        <p class="project-lead">
+          O sucessor do Reforma Simples, reescrito do zero em <strong>Flutter</strong>. Orçamento de obras e reformas com preços SINAPI, desenhado para <strong>engenheiros civis</strong> que precisam entregar um orçamento defensável — para o cliente, para uma licitação ou para aprovação — sem abrir mão da precisão que a planilha dava.
+        </p>
+
+        <p class="project-credit">
+          Desenvolvido em conjunto com minha irmã, <strong>Amélia Alice</strong>, responsável pelo layout do aplicativo e pela maior e mais significativa parte do desenvolvimento.
+        </p>
+
+        <div class="shots" tabindex="0" role="group" aria-label="Capturas de tela do Constructus">
+          <figure class="shot">
+            <img src="images/apps/ct-1.webp" alt="Tela do Constructus com a lista de orçamentos, total geral e valor médio por obra" loading="lazy" decoding="async">
+            <figcaption>Seus orçamentos</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/apps/ct-2.webp" alt="Análise de custos do Constructus com gráfico de barras da Curva ABC por serviço" loading="lazy" decoding="async">
+            <figcaption>Curva ABC</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/apps/ct-3.webp" alt="Catálogo de serviços SINAPI do Constructus organizado em categorias como Estrutura, Pisos, Paredes e Revestimentos" loading="lazy" decoding="async">
+            <figcaption>Catálogo de serviços</figcaption>
+          </figure>
+        </div>
+        <p class="shots-note">arraste para ver todas as telas</p>
+
+        <ul class="project-features cols">
+          <li><span><strong>Sintética, analítica e Curva ABC</strong> — as três visões do orçamento que o engenheiro precisa entregar, incluindo a concentração de custo por serviço.</span></li>
+          <li><span><strong>BDI, desoneração e estado de referência</strong> — configuráveis, com defaults que já vêm no valor mais provável.</span></li>
+          <li><span><strong>Preços SINAPI sempre atuais</strong> — baixados sob demanda por estado e mês, com cache local para funcionar offline no canteiro.</span></li>
+          <li><span><strong>Exportação em PDF e Excel</strong> — saída em nível de entrega, alinhada e tabular, pronta para ir ao cliente.</span></li>
+          <li><span><strong>Centenas de serviços catalogados</strong> — formulários dinâmicos, busca e categorias por etapa da obra.</span></li>
+          <li><span><strong>Tema claro e escuro</strong> — alto contraste nos dois, porque o app é lido na obra, sob sol forte.</span></li>
+        </ul>
+
+        <div class="project-actions">
+          <a href="https://constructus.com.br" target="_blank" rel="noopener" class="btn primary">Site oficial <span class="arrow">→</span></a>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>

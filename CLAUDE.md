@@ -8,7 +8,7 @@ Este é o site pessoal de Giuliano Cardoso - desenvolvedor de software brasileir
 
 ## Funcionalidades Principais
 
-- **Carrossel de Imagens**: Implementação de carrossel para showcase do app "Reforma Simples"
+- **Seção de Aplicativos**: Três produtos próprios (Reforma Simples, Olha o Bichim!, Constructus), cada um com faixa de capturas de tela, lista de recursos, números e links para site oficial e lojas
 - **Tema Dark/Light**: Sistema de alternância de temas usando CSS custom properties
 - **Design Responsivo**: Layout adaptável para desktop, tablet e mobile
 - **Acessibilidade**: Implementação WCAG 2.1 AA compliant
@@ -17,9 +17,14 @@ Este é o site pessoal de Giuliano Cardoso - desenvolvedor de software brasileir
 
 ```
 /
-├── index.html              # Arquivo principal do site
-├── images/                 # Diretório de imagens
-│   ├── f1.png - f5.png    # Screenshots do app Reforma Simples
+├── index.html              # Arquivo principal do site (HTML + CSS + JS inline)
+├── images/
+│   ├── apps/              # Capturas e ícones dos apps exibidos no site
+│   │   ├── rs-1..4.webp   # Reforma Simples
+│   │   ├── ob-1..5.webp   # Olha o Bichim!
+│   │   ├── ct-1..3.webp   # Constructus
+│   │   └── icon-{rs,ob,ct}.png
+│   ├── f1.png - f5.png    # Screenshots originais do Reforma Simples (fonte de rs-*.webp)
 │   └── outras imagens...
 ├── docs/
 │   └── superpowers/
@@ -28,6 +33,18 @@ Este é o site pessoal de Giuliano Cardoso - desenvolvedor de software brasileir
 └── arquivos de configuração (favicons, manifests, etc.)
 ```
 
+### Repositórios de origem dos apps
+
+As capturas em `images/apps/` são derivadas dos repositórios dos próprios apps:
+
+| App | Repositório local | Origem das capturas |
+| --- | --- | --- |
+| Reforma Simples | `~/rf/app` (Cordova) | `images/f*.png` deste repo |
+| Olha o Bichim! | `~/rf/capivara_2048` (Flutter) | `android/fastlane/metadata/android/pt-BR/images/` |
+| Constructus | `~/rf/constructus` (Flutter) | `design/play/` |
+
+Para atualizar: redimensione para 540px de largura em WebP (`magick origem.png -resize 540x -quality 82 destino.webp`).
+
 ## Tecnologias Utilizadas
 
 - **HTML5**: Estrutura semântica moderna
@@ -35,10 +52,7 @@ Este é o site pessoal de Giuliano Cardoso - desenvolvedor de software brasileir
   - CSS Custom Properties para temas
   - Flexbox e Grid para layout
   - Media queries para responsividade
-- **JavaScript ES6+**: 
-  - Classes para organização
-  - Event listeners para interatividade
-  - Auto-play e controles manuais do carrossel
+- **JavaScript ES6+** (mínimo): apenas alternância de tema e `IntersectionObserver` para as animações de entrada
 
 ## Padrões de Desenvolvimento
 
@@ -56,21 +70,17 @@ Este é o site pessoal de Giuliano Cardoso - desenvolvedor de software brasileir
 - Use conventional commits (feat:, fix:, docs:, etc.)
 - Inclua co-autoria: `Co-Authored-By: Claude Sonnet 4 <noreply@anthropic.com>`
 
-## Carrossel de Imagens
+## Faixa de Capturas (`.shots`)
 
-O carrossel principal substitui o mockup CSS original e apresenta:
-- 5 imagens do app Reforma Simples (f1.png - f5.png)
-- Auto-play a cada 4 segundos
-- Navegação manual via dots
-- Pause no hover
-- Transições suaves com fade
-- Totalmente responsivo e acessível
+Rolagem horizontal nativa, sem JavaScript: `overflow-x: auto` + `scroll-snap-type: x proximity`.
+Cada `.shot` é um `<figure>` com imagem de altura fixa (400px no desktop, 300px no mobile) e legenda.
+O contêiner tem `tabindex="0"` e `role="group"` para permitir rolagem pelo teclado com foco visível.
+A dica "arraste para ver todas as telas" só aparece abaixo de 880px, onde a faixa de fato transborda.
 
 ## Considerações de Acessibilidade
 
 - Todas as imagens possuem alt text descritivo em português
-- Dots de navegação têm aria-labels apropriados
-- Suporte completo a navegação por teclado
+- Faixas de capturas com `role="group"`, `aria-label` e foco por teclado
 - Estados de foco visíveis
 - Contraste adequado em ambos os temas
 
@@ -83,9 +93,8 @@ O carrossel principal substitui o mockup CSS original e apresenta:
 
 ## Performance
 
-- Imagens pré-carregadas com `<link rel="preload">`
-- Transições otimizadas para GPU
-- Código JavaScript minificado na produção
+- Capturas em WebP a 540px de largura, servidas com `loading="lazy"` e `decoding="async"`
+- Transições otimizadas para GPU (`opacity` e `transform`)
 
 ## Deploy e Publicação
 
