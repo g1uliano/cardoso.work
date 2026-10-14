@@ -96,6 +96,13 @@ A dica "arraste para ver todas as telas" só aparece abaixo de 880px, onde a fai
 - Capturas em WebP a 540px de largura, servidas com `loading="lazy"` e `decoding="async"`
 - Transições otimizadas para GPU (`opacity` e `transform`)
 
+## Estrutura e manutenção
+
+- `404.html`: página de erro autônoma (caminhos absolutos, tema lido de `localStorage.theme`). Sem ela o Cloudflare Pages devolve `index.html` com status 200 para qualquer URL.
+- `_redirects`: manda `docs/`, `scripts/`, `CLAUDE.md`, `README.md` e as fontes `images/f*.png` para `/` (301). Arquivo novo que não faz parte do site publicado entra aqui.
+- SEO: `meta description`, `canonical`, Open Graph (`images/og.jpg`, 1200x630, gerada com `magick` em JetBrains Mono), JSON-LD `Person`, `robots.txt` e `sitemap.xml` (atualize `lastmod` em mudanças de conteúdo).
+- Antes de commitar: `bash scripts/check.sh` (links locais, imagens ≤ 200 KB, regras do `_redirects` apontando para arquivos existentes).
+
 ## Deploy e Publicação
 
 - **URL de Produção**: https://cardoso.work
